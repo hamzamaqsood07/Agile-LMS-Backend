@@ -1,0 +1,71 @@
+const mongoose = require("mongoose")
+
+const organizationModel = mongoose.Schema({
+    name:{
+        type:String,
+        required:true
+    },
+    address:{
+        country:{
+            type:String,
+            required:true
+        },
+        state:{
+            type:String,
+            required:true
+        },
+        city:{
+            type:String,
+            required:true
+        },
+        street:{
+            type:String,
+            required:true
+        },
+        postalCode:{
+            type:String,
+            required:true
+        },
+        required:true
+    },
+    phone:{
+        type:String,
+        match:/^[0-9]+$/,
+        length:11,
+        required:true
+    },
+    createdAt:{
+        type:Date,
+        default:Date.now(),
+        required:true
+    },
+    updatedAt:{
+        type:Date,
+        default:Date.now(),
+        required:true
+    },
+    estimatedNoOfStudents:{
+        type:String,
+        required:true
+    },
+    instituteType:{
+        type:String,
+        required:true
+    },
+    students:[{
+        type:mongoose.Schema.Types.ObjectId,
+        ref:"student",
+        default:[],
+        required:true
+    }],
+    user:[
+        {
+            type:mongoose.Schema.Types.ObjectId,
+            ref:"user",
+            default:[],
+            required:true
+        }
+    ]
+})
+
+module.exports = mongoose.model("organization",organizationModel)
