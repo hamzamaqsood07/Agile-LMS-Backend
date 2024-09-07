@@ -50,6 +50,7 @@ const organizationModel = mongoose.Schema({
     },
     instituteType:{
         type:String,
+        enum:["school","college","university","academy"],
         required:true
     },
     students:[{

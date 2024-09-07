@@ -5,4 +5,5 @@ router.get("/",(req,res)=>{
     res.send("this is student page")
 })
 
+
 module.exports = router

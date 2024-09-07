@@ -6,6 +6,17 @@ const studentModel = mongoose.Schema({
         type:String,
         required:true
     },
+    email:{
+        type:String,
+        email:true,
+        required:()=>{
+            if(this.organization.instituteType==="college"||this.organization.instituteType==="university")
+            {
+                return true
+            }
+            return false
+        }
+    },
     familyNo:{
         type:Number,
         required:true
@@ -132,7 +143,7 @@ const studentModel = mongoose.Schema({
     },
     organization:{
         type:mongoose.Schema.Types.ObjectId,
-        ref:organization,
+        ref:"organization",
         requierd:true
     },
     postalCode:{
