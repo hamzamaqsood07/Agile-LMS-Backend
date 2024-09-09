@@ -4,53 +4,55 @@ const userModel = mongoose.Schema({
     image:Buffer,
     name:{
         type:String,
-        requierd:true
+        required:true
     },
     email:{
         type:String,
-        email:true,
-        requierd:true
+        match:/^[\w-.]+@([\w-]+\.)+[a-zA-Z]{2,7}$/,
+        required:true
     },
     password:{
         type:String,
-        requierd:true
+        required:true
     },
     gender:{
         type:String,
         enum:["male","female","others"],
-        requierd:true
+        required:true
     },
     idCardNo:{
         type:String,
         match: /^[0-9]+$/,
-        length: 13,
+        minlength: 13,  
+        maxlength: 13,
         required:true
     },
     phone:{
         type:String,
         match:/^[0-9]+$/,
-        length:11,
-        requierd:true
+        minlength: 11,  
+        maxlength: 11,
+        required:true
     },
     role:{
         type:String,
         enum:["admin","frontdesk"],
-        requierd:true
+        required:true
     },
     organization:{
         type:mongoose.Schema.Types.ObjectId,
         ref:"organization",
-        requierd:true
+        required:true
     },
     createdAt:{
         type:Date,
         default:Date.now(),
-        requierd:true
+        required:true
     },
     updatedAt:{
         type:Date,
         default:Date.now(),
-        requierd:true
+        required:true
     }
 })
 

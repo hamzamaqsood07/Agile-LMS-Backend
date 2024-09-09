@@ -76,8 +76,7 @@ const studentModel = mongoose.Schema({
         postalCode:{
             type:String,
             required:true
-        },
-        required:true
+        }
     },
     bFormNo: {
         type: String,
@@ -89,7 +88,7 @@ const studentModel = mongoose.Schema({
     gender:{
         type:String,
         enum:["male","female","others"],
-        requierd:true
+        required:true
     },
     dob:{
         type:Date,
@@ -110,7 +109,7 @@ const studentModel = mongoose.Schema({
     admissionDate:{
         type:Date,
         default:Date.now(),
-        requierd:true
+        required:true
     },
     identificationMark:String,
     status:{
@@ -125,26 +124,26 @@ const studentModel = mongoose.Schema({
     },
     class:{
         type:String,
-        requierd:true
+        required:true
     },
     section:{
         type:String,
-        requierd:true
+        required:true
     },
     createdDate:{
         type:Date,
         default:Date.now(),
-        requierd:true
+        required:true
     },
     updatedDate:{
         type:Date,
         default:Date.now(),
-        requierd:true
+        required:true
     },
     organization:{
         type:mongoose.Schema.Types.ObjectId,
         ref:"organization",
-        requierd:true
+        required:true
     },
     postalCode:{
         type:String,

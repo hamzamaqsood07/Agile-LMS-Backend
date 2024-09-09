@@ -25,13 +25,13 @@ const organizationModel = mongoose.Schema({
         postalCode:{
             type:String,
             required:true
-        },
-        required:true
+        }
     },
     phone:{
         type:String,
         match:/^[0-9]+$/,
-        length:11,
+        minlength: 11,  
+        maxlength: 11,
         required:true
     },
     createdAt:{
@@ -44,10 +44,7 @@ const organizationModel = mongoose.Schema({
         default:Date.now(),
         required:true
     },
-    estimatedNoOfStudents:{
-        type:String,
-        required:true
-    },
+    estimatedNoOfStudents:String,
     instituteType:{
         type:String,
         enum:["school","college","university","academy"],
@@ -57,14 +54,12 @@ const organizationModel = mongoose.Schema({
         type:mongoose.Schema.Types.ObjectId,
         ref:"student",
         default:[],
-        required:true
     }],
     user:[
         {
             type:mongoose.Schema.Types.ObjectId,
             ref:"user",
             default:[],
-            required:true
         }
     ]
 })
