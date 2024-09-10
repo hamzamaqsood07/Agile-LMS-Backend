@@ -8,6 +8,6 @@ router.get("/",(req,res)=>{
 
 router.post("/login",loginUser)
 
-router.get("/logout",logoutUser)
+router.post("/logout",logoutUser)
 
 module.exports = router

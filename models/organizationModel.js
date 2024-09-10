@@ -55,7 +55,7 @@ const organizationModel = mongoose.Schema({
         ref:"student",
         default:[],
     }],
-    user:[
+    users:[
         {
             type:mongoose.Schema.Types.ObjectId,
             ref:"user",
