@@ -6,148 +6,104 @@ const studentModel = mongoose.Schema({
         type:String,
         required:true
     },
+    rollNo:{
+        type:String,
+        required:true,
+        unique:true
+    },
     email:{
         type:String,
-        email:true,
-        required:()=>{
-            if(this.organization.instituteType==="college"||this.organization.instituteType==="university")
-            {
-                return true
-            }
-            return false
-        }
+        match:/^[\w-.]+@([\w-]+\.)+[a-zA-Z]{2,7}$/,
     },
-    familyNo:{
-        type:Number,
-        required:true
-    },
+    familyNo:Number,
     fatherName:{
         type:String,
         required:true
     },
-    motherName:{
-        type:String,
-        required:true
-    },
+    motherName:String,
     fatherEmail:{
         type:String,
-        email:true,
-        required:true
+        match:/^[\w-.]+@([\w-]+\.)+[a-zA-Z]{2,7}$/,
     },
     motherEmail:{
         type:String,
-        email:true,
-        required:true
+        match:/^[\w-.]+@([\w-]+\.)+[a-zA-Z]{2,7}$/,
     },
     fatherMobile:{
         type:String,
         match:/^[0-9]+$/,
-        length:11,
-        required:true
+        minlength: 11,  
+        maxlength: 11
     },
     motherMobile:{
         type:String,
         match:/^[0-9]+$/,
-        length:11,
-        required:true
+        minlength: 11,  
+        maxlength: 11
     },
     bloodGroup:{
         type:String,
-        enum:["A+","A-","B+","B-","AB+","AB-","O+","O-"],
-        required:true
+        enum:["A+","A-","B+","B-","AB+","AB-","O+","O-"]
     },
     address:{
-        country:{
-            type:String,
-            required:true
-        },
-        state:{
-            type:String,
-            required:true
-        },
-        city:{
-            type:String,
-            required:true
-        },
-        street:{
-            type:String,
-            required:true
-        },
-        postalCode:{
-            type:String,
-            required:true
-        }
+        country:String,
+        state:String,
+        city:String,
+        street:String,
+        postalCode:String
     },
-    bFormNo: {
+    cnic: {
         type: String,
         required: true,
         match: /^[0-9]+$/,
-        length: 13,
+        minlength: 13,  
+        maxlength: 13,
         unique: true,
     },
     gender:{
         type:String,
-        enum:["male","female","others"],
-        required:true
+        enum:["male","female","others"]
     },
-    dob:{
-        type:Date,
-        required:true
-    },
+    dob:Date,
     fatherCnic:{
         type:String,
         match: /^[0-9]+$/,
-        length: 13,
+        minlength: 13,  
+        maxlength: 13,
         required:true
     },
     motherCnic:{
         type:String,
         match: /^[0-9]+$/,
-        length: 13,
-        required:true
+        minlength: 13,  
+        maxlength: 13,
     },
     admissionDate:{
         type:Date,
-        default:Date.now(),
-        required:true
+        default:Date.now()
     },
     identificationMark:String,
     status:{
         type:String,
-        enum:["active","left","struck","graduated"],
-        required:true
+        enum:["active","left","struck","graduated"]
     },
     statusDate:{
         type:Date,
-        default:Date.now(),
-        required:true
+        default:Date.now()
     },
-    class:{
-        type:String,
-        required:true
-    },
-    section:{
-        type:String,
-        required:true
-    },
+    class:String,
+    section:String,
     createdDate:{
         type:Date,
-        default:Date.now(),
-        required:true
+        default:Date.now()
     },
     updatedDate:{
         type:Date,
-        default:Date.now(),
-        required:true
+        default:Date.now()
     },
     organization:{
         type:mongoose.Schema.Types.ObjectId,
-        ref:"organization",
-        required:true
-    },
-    postalCode:{
-        type:String,
-        required:true
+        ref:"organization"
     }
 })
 
