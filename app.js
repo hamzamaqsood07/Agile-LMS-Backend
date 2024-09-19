@@ -10,7 +10,7 @@ const cookieParser = require("cookie-parser")
 
 require("dotenv").config()
 
-const db = require("./config/mongooseConnection")
+require("./config/mongooseConnection")
 
 server.use(cookieParser())
 server.use(cors({
@@ -19,6 +19,7 @@ server.use(cors({
 }))
 server.use(express.json())
 server.use(express.urlencoded({extended:true}))
+
 
 server.use("/",indexRouter)
 server.use("/users",userRouter)

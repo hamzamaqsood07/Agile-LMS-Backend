@@ -20,8 +20,8 @@ module.exports.createStudent = async (req, res) => {
     })
     const userEmail =req.user.email
     const user = await userModel.findOne({email:userEmail})
-    const organizationId = user.organization.toString()
-    const organization = await organizationModel.findOne({_id:organizationId})
+    const orgId = user.organization.toString()
+    const organization = await organizationModel.findOne({_id:orgId})
     organization.students.push(createdStudent._id.toString())
     await organization.save()
     res.status(201).json({message:"Student is created"})
@@ -33,5 +33,16 @@ module.exports.createStudent = async (req, res) => {
         } else {
             res.status(500).json({message:error.message})     
         }
+    }
+}
+
+module.exports.readStudent = async(req,res)=>{
+    try{
+    const user = await userModel.findOne({_id:"66e02e89ef0fdf51e6777c13"})
+    const orgId = user.organization.toString()
+    const organization = await organizationModel.findOne({_id:orgId}).populate("students")
+    res.status(200).send(organization.students)
+    }catch(error){
+        res.status(500).json({message:error.message})
     }
 }
