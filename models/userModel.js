@@ -1,6 +1,6 @@
-const mongoose = require("mongoose")
+import {Schema,model} from "mongoose"
 
-const userModel = mongoose.Schema({
+const userModel = Schema({
     image:Buffer,
     name:{
         type:String,
@@ -40,20 +40,12 @@ const userModel = mongoose.Schema({
         required:true
     },
     organization:{
-        type:mongoose.Schema.Types.ObjectId,
+        type:Schema.Types.ObjectId,
         ref:"organization",
         required:true
     },
-    createdAt:{
-        type:Date,
-        default:Date.now(),
-        required:true
-    },
-    updatedAt:{
-        type:Date,
-        default:Date.now(),
-        required:true
-    }
+},{
+    timestamps: true
 })
 
-module.exports = mongoose.model("user",userModel)
+export default model("users",userModel)

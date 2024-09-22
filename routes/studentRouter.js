@@ -1,9 +1,9 @@
-const express = require("express")
-const router = express.Router()
-const { createStudent,readStudent } = require("../controllers/studentController")
+import {Router} from "express"
+const router = Router()
+import {createStudent,readStudent} from "../controllers/studentController.js"
 
 router.post("/create",createStudent)
 
 router.get("/read",readStudent)
 
-module.exports = router
+export default router

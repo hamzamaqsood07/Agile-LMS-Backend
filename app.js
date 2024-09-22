@@ -1,24 +1,24 @@
-const express = require("express")
+import express,{json,urlencoded} from "express"
 const server = express()
 const port = 3000
-const cors = require("cors")
-const indexRouter = require("./routes/index")
-const userRouter = require("./routes/userRouter")
-const organizationRouter = require("./routes/organizationRouter")
-const studentRouter = require("./routes/studentRouter")
-const cookieParser = require("cookie-parser")
+import cors from "cors"
+import indexRouter from "./routes/index.js"
+import userRouter from "./routes/userRouter.js"
+import organizationRouter from "./routes/organizationRouter.js"
+import studentRouter from "./routes/studentRouter.js"
+import cookieParser from "cookie-parser"
 
-require("dotenv").config()
+import "dotenv/config";
 
-require("./config/mongooseConnection")
+import "./config/mongooseConnection.js"
 
 server.use(cookieParser())
 server.use(cors({
     origin: 'http://localhost:5173',
     credentials: true 
 }))
-server.use(express.json())
-server.use(express.urlencoded({extended:true}))
+server.use(json())
+server.use(urlencoded({extended:true}))
 
 
 server.use("/",indexRouter)

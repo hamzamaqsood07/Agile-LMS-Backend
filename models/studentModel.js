@@ -1,6 +1,6 @@
-const mongoose = require("mongoose")
+import {Schema,model} from "mongoose"
 
-const studentModel = mongoose.Schema({
+const studentSchema = new Schema({
     image:Buffer,
     name:{
         type:String,
@@ -93,18 +93,21 @@ const studentModel = mongoose.Schema({
     },
     class:String,
     section:String,
-    createdDate:{
-        type:Date,
-        default:Date.now()
-    },
-    updatedDate:{
-        type:Date,
-        default:Date.now()
-    },
+    // createdDate:{
+    //     type:Date,
+    //     default:Date.now()
+    // },
+    // updatedDate:{
+    //     type:Date,
+    //     default:Date.now()
+    // },
     organization:{
-        type:mongoose.Schema.Types.ObjectId,
+        type:Schema.Types.ObjectId,
         ref:"organization"
     }
+},{
+    timestamps:true
 })
 
-module.exports = mongoose.model("student",studentModel)
+const studentModel = new model("students",studentSchema);
+export default studentModel;

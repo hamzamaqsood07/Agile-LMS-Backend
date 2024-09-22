@@ -1,14 +1,14 @@
-const userModel = require("../models/userModel")
-const bcrypt = require("bcrypt")
-const generateToken = require("../utils/generateToken")
+import userModel from "../models/userModel.js"
+import {compare} from "bcrypt"
+import generateToken from "../utils/generateToken.js"
 
-module.exports.loginUser = async (req, res) => {
+export async function loginUser(req, res) {
     try {
         const { email, password } = req.body
         const user = await userModel.findOne({ email })
         if (!user) return res.status(401).json({ message: "Invalid username or password" });
 
-        const result = await bcrypt.compare(password, user.password)
+        const result = await compare(password, user.password)
         if (!result) return res.status(401).json({ message: "Invalid username or password" });
 
         const token = generateToken(user)
@@ -24,7 +24,7 @@ module.exports.loginUser = async (req, res) => {
     }
 
 }
-module.exports.logoutUser = (req, res) => {
+export function logoutUser(req, res) {
     try {
         res.cookie("token", "")
         res.status(200).json({message:""})

@@ -1,6 +1,6 @@
-const mongoose = require("mongoose")
+import {Schema,model} from "mongoose"
 
-const organizationModel = mongoose.Schema({
+const organizationModel = Schema({
     name:{
         type:String,
         required:true
@@ -34,16 +34,6 @@ const organizationModel = mongoose.Schema({
         maxlength: 11,
         required:true
     },
-    createdAt:{
-        type:Date,
-        default:Date.now(),
-        required:true
-    },
-    updatedAt:{
-        type:Date,
-        default:Date.now(),
-        required:true
-    },
     estimatedNoOfStudents:String,
     instituteType:{
         type:String,
@@ -51,17 +41,19 @@ const organizationModel = mongoose.Schema({
         required:true
     },
     students:[{
-        type:mongoose.Schema.Types.ObjectId,
+        type:Schema.Types.ObjectId,
         ref:"student",
         default:[],
     }],
     users:[
         {
-            type:mongoose.Schema.Types.ObjectId,
+            type:Schema.Types.ObjectId,
             ref:"user",
             default:[],
         }
     ]
+},{
+    timestamps: true
 })
 
-module.exports = mongoose.model("organization",organizationModel)
+export default model("organizations",organizationModel)

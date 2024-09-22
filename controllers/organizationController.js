@@ -1,10 +1,10 @@
-const organizationModel = require("../models/organizationModel")
+import orgModel from "../models/organizationModel.js";
 
 
-module.exports.createOrganization = async (req, res) => {
+export async function createOrganization(req, res) {
     try {
         const { name, country, state, city, street, postalCode, phone, createdAt, updatedAt, instituteType } = req.body
-        const organization = await organizationModel.create({
+        const organization = await orgModel.create({
             name,
             address: {
                 country,
