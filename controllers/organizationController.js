@@ -18,7 +18,7 @@ export async function createOrganization(req, res) {
             updatedAt,
             instituteType
         });
-        res.status(201).json({ organization })
+        res.status(201).json({ message:"Organization created" })
     } catch (error) {
         res.status(500).json({ message: error.message })
     }

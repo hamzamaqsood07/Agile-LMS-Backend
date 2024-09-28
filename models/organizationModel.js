@@ -42,13 +42,13 @@ const organizationModel = Schema({
     },
     students:[{
         type:Schema.Types.ObjectId,
-        ref:"student",
+        ref:"students",
         default:[],
     }],
     users:[
         {
             type:Schema.Types.ObjectId,
-            ref:"user",
+            ref:"users",
             default:[],
         }
     ]

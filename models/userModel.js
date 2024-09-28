@@ -41,7 +41,7 @@ const userModel = Schema({
     },
     organization:{
         type:Schema.Types.ObjectId,
-        ref:"organization",
+        ref:"organizations",
         required:true
     },
 },{
