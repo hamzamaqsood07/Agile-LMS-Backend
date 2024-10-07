@@ -1,4 +1,4 @@
-import express,{json,urlencoded} from "express"
+import express,{json} from "express"
 const server = express()
 const port = 3000
 import cors from "cors"
@@ -18,7 +18,6 @@ server.use(cors({
     credentials: true 
 }))
 server.use(json())
-server.use(urlencoded({extended:true}))
 
 
 server.use("/",indexRouter)

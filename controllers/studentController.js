@@ -8,20 +8,13 @@ export async function createStudent(req, res) {
         const student = await studentModel.findOne({ rollNo: req.body.rollNo })
         if (student) return res.status(409).json({ message: "Student already exist with this roll no" })
 
-        // const userEmail =req.user.email
-        const user = await userModel.findOne({ email: 'baair@gmail.com' })
+        const userEmail =req.user.email
+        const user = await userModel.findOne({ email: userEmail })
         const orgId = user.organization.toString()
 
         const createdStudent = await studentModel.create({
             ...rest,
-            organization: orgId,
-            address: {
-                country,
-                state,
-                city,
-                street,
-                postalCode
-            }
+            organization: orgId
         })
 
         const organization = await orgModel.findOne({ _id: orgId })
@@ -41,8 +34,8 @@ export async function createStudent(req, res) {
 
 export async function readStudent(req, res) {
     try {
-        // const id = req.user.id
-        const user = await userModel.findOne({ _id: "66f83f36e9f7de0c55b433e6" })
+        const id = req.user.id
+        const user = await userModel.findOne({ _id:id })
         const orgId = user.organization.toString()
         const organization = await orgModel.findOne({ _id: orgId }).populate("students")
         res.status(200).send(organization.students)
@@ -57,16 +50,28 @@ export async function deleteStudent(req, res) {
         const student = await studentModel.findOne({ _id: id })
         if (!student) return res.status(404).json({ message: "Student not found" })
 
-        // const userEmail =req.user.email
-        const user = await userModel.findOne({ email: 'baair@gmail.com' })
+        const userEmail =req.user.email
+        const user = await userModel.findOne({ email: userEmail })
         const orgId = user.organization.toString()
         const organization = await orgModel.findOne({ _id: orgId })
         const index = organization.students.indexOf(id)
-        organization.students.splice(index,1)
+        organization.students.splice(index, 1)
         await organization.save()
 
-        await studentModel.deleteOne({_id:id})
+        await studentModel.deleteOne({ _id: id })
         res.status(200).json({ message: "Student delted Successfully" })
+    } catch (error) {
+        res.status(500).json({ message: error.message })
+    }
+}
+
+export async function updateStudent(req, res) {
+    try {
+        const id = req.params.id
+        const { ...rest } = req.body
+        const student = await studentModel.findByIdAndUpdate(id,{...rest },{runValidators: true, new: true })
+        if (!student) return res.status(404).json({ message: "Student Not Found" })
+        res.status(200).json({ message: "Student updated successfully" })
     } catch (error) {
         res.status(500).json({ message: error.message })
     }
